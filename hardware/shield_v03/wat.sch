@@ -29,6 +29,10 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
+LIBS:recom-rd
+LIBS:RO-1224S
+LIBS:mp-1584
+LIBS:nano
 LIBS:wat-cache
 EELAYER 25 0
 EELAYER END
@@ -94,7 +98,7 @@ U 1 1 5D4CAF0F
 P 1195 5625
 F 0 "P2" H 1195 5775 50  0000 C CNN
 F 1 "PINZA_1" V 1295 5625 50  0000 C CNN
-F 2 "Connect:bornier2" H 1195 5625 50  0001 C CNN
+F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 1195 5625 50  0001 C CNN
 F 3 "" H 1195 5625 50  0000 C CNN
 	1    1195 5625
 	-1   0    0    -1  
@@ -107,7 +111,7 @@ U 1 1 5D4CAF07
 P 1625 5785
 F 0 "C2" H 1650 5885 50  0000 L CNN
 F 1 "100nF" H 1650 5685 50  0000 L CNN
-F 2 "Capacitors_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 1663 5635 50  0001 C CNN
+F 2 "Capacitors_SMD:C_1206_HandSoldering" H 1663 5635 50  0001 C CNN
 F 3 "" H 1625 5785 50  0000 C CNN
 	1    1625 5785
 	1    0    0    -1  
@@ -118,7 +122,7 @@ U 1 1 5D4CAF01
 P 2085 5775
 F 0 "R3" V 2165 5775 50  0000 C CNN
 F 1 "10k" V 2085 5775 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 2015 5775 50  0001 C CNN
+F 2 "libreria_huellas_proyecto:Resistor_Horizontal_RM10mm" V 2015 5775 50  0001 C CNN
 F 3 "" H 2085 5775 50  0000 C CNN
 	1    2085 5775
 	1    0    0    -1  
@@ -129,7 +133,7 @@ U 1 1 5D4D18F7
 P 3115 5625
 F 0 "P3" H 3115 5775 50  0000 C CNN
 F 1 "PINZA_2" V 3215 5625 50  0000 C CNN
-F 2 "Connect:bornier2" H 3115 5625 50  0001 C CNN
+F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 3115 5625 50  0001 C CNN
 F 3 "" H 3115 5625 50  0000 C CNN
 	1    3115 5625
 	-1   0    0    -1  
@@ -144,7 +148,7 @@ U 1 1 5D4D18FF
 P 3545 5785
 F 0 "C6" H 3570 5885 50  0000 L CNN
 F 1 "100nF" H 3570 5685 50  0000 L CNN
-F 2 "Capacitors_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 3583 5635 50  0001 C CNN
+F 2 "Capacitors_SMD:C_1206_HandSoldering" H 3583 5635 50  0001 C CNN
 F 3 "" H 3545 5785 50  0000 C CNN
 	1    3545 5785
 	1    0    0    -1  
@@ -155,7 +159,7 @@ U 1 1 5D4D1905
 P 4005 5775
 F 0 "R5" V 4085 5775 50  0000 C CNN
 F 1 "10k" V 4005 5775 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 3935 5775 50  0001 C CNN
+F 2 "libreria_huellas_proyecto:Resistor_Horizontal_RM10mm" V 3935 5775 50  0001 C CNN
 F 3 "" H 4005 5775 50  0000 C CNN
 	1    4005 5775
 	1    0    0    -1  
@@ -166,7 +170,7 @@ U 1 1 5D4D3DC6
 P 5035 5625
 F 0 "P4" H 5035 5775 50  0000 C CNN
 F 1 "PINZA_3" V 5135 5625 50  0000 C CNN
-F 2 "Connect:bornier2" H 5035 5625 50  0001 C CNN
+F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 5035 5625 50  0001 C CNN
 F 3 "" H 5035 5625 50  0000 C CNN
 	1    5035 5625
 	-1   0    0    -1  
@@ -181,7 +185,7 @@ U 1 1 5D4D3DCE
 P 5465 5785
 F 0 "C8" H 5490 5885 50  0000 L CNN
 F 1 "100nF" H 5490 5685 50  0000 L CNN
-F 2 "Capacitors_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 5503 5635 50  0001 C CNN
+F 2 "Capacitors_SMD:C_1206_HandSoldering" H 5503 5635 50  0001 C CNN
 F 3 "" H 5465 5785 50  0000 C CNN
 	1    5465 5785
 	1    0    0    -1  
@@ -192,7 +196,7 @@ U 1 1 5D4D3DD4
 P 5925 5775
 F 0 "R7" V 6005 5775 50  0000 C CNN
 F 1 "10k" V 5925 5775 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 5855 5775 50  0001 C CNN
+F 2 "libreria_huellas_proyecto:Resistor_Horizontal_RM10mm" V 5855 5775 50  0001 C CNN
 F 3 "" H 5925 5775 50  0000 C CNN
 	1    5925 5775
 	1    0    0    -1  
@@ -203,7 +207,7 @@ U 1 1 5D4D3DE6
 P 6955 5625
 F 0 "P5" H 6955 5775 50  0000 C CNN
 F 1 "PINZA_4" V 7055 5625 50  0000 C CNN
-F 2 "Connect:bornier2" H 6955 5625 50  0001 C CNN
+F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 6955 5625 50  0001 C CNN
 F 3 "" H 6955 5625 50  0000 C CNN
 	1    6955 5625
 	-1   0    0    -1  
@@ -218,7 +222,7 @@ U 1 1 5D4D3DEE
 P 7385 5785
 F 0 "C9" H 7410 5885 50  0000 L CNN
 F 1 "100nF" H 7410 5685 50  0000 L CNN
-F 2 "Capacitors_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 7423 5635 50  0001 C CNN
+F 2 "Capacitors_SMD:C_1206_HandSoldering" H 7423 5635 50  0001 C CNN
 F 3 "" H 7385 5785 50  0000 C CNN
 	1    7385 5785
 	1    0    0    -1  
@@ -229,7 +233,7 @@ U 1 1 5D4D3DF4
 P 7845 5775
 F 0 "R8" V 7925 5775 50  0000 C CNN
 F 1 "10k" V 7845 5775 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 7775 5775 50  0001 C CNN
+F 2 "libreria_huellas_proyecto:Resistor_Horizontal_RM10mm" V 7775 5775 50  0001 C CNN
 F 3 "" H 7845 5775 50  0000 C CNN
 	1    7845 5775
 	1    0    0    -1  
@@ -242,7 +246,7 @@ U 1 1 5D4C6526
 P 8920 5625
 F 0 "P6" H 8920 5775 50  0000 C CNN
 F 1 "PINZA_5" V 9020 5625 50  0000 C CNN
-F 2 "Connect:bornier2" H 8920 5625 50  0001 C CNN
+F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 8920 5625 50  0001 C CNN
 F 3 "" H 8920 5625 50  0000 C CNN
 	1    8920 5625
 	-1   0    0    -1  
@@ -257,7 +261,7 @@ U 1 1 5D4C652E
 P 9350 5785
 F 0 "C11" H 9375 5885 50  0000 L CNN
 F 1 "100nF" H 9375 5685 50  0000 L CNN
-F 2 "Capacitors_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 9388 5635 50  0001 C CNN
+F 2 "Capacitors_SMD:C_1206_HandSoldering" H 9388 5635 50  0001 C CNN
 F 3 "" H 9350 5785 50  0000 C CNN
 	1    9350 5785
 	1    0    0    -1  
@@ -268,7 +272,7 @@ U 1 1 5D4C6534
 P 9810 5775
 F 0 "R9" V 9890 5775 50  0000 C CNN
 F 1 "10k" V 9810 5775 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 9740 5775 50  0001 C CNN
+F 2 "libreria_huellas_proyecto:Resistor_Horizontal_RM10mm" V 9740 5775 50  0001 C CNN
 F 3 "" H 9810 5775 50  0000 C CNN
 	1    9810 5775
 	1    0    0    -1  
@@ -279,7 +283,7 @@ U 1 1 5D4C6F0D
 P 1195 6585
 F 0 "P7" H 1195 6735 50  0000 C CNN
 F 1 "PINZA_6" V 1295 6585 50  0000 C CNN
-F 2 "Connect:bornier2" H 1195 6585 50  0001 C CNN
+F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 1195 6585 50  0001 C CNN
 F 3 "" H 1195 6585 50  0000 C CNN
 	1    1195 6585
 	-1   0    0    -1  
@@ -292,7 +296,7 @@ U 1 1 5D4C6F14
 P 1625 6745
 F 0 "C3" H 1650 6845 50  0000 L CNN
 F 1 "100nF" H 1650 6645 50  0000 L CNN
-F 2 "Capacitors_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 1663 6595 50  0001 C CNN
+F 2 "Capacitors_SMD:C_1206_HandSoldering" H 1663 6595 50  0001 C CNN
 F 3 "" H 1625 6745 50  0000 C CNN
 	1    1625 6745
 	1    0    0    -1  
@@ -303,7 +307,7 @@ U 1 1 5D4C6F1A
 P 2085 6735
 F 0 "R4" V 2165 6735 50  0000 C CNN
 F 1 "10k" V 2085 6735 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 2015 6735 50  0001 C CNN
+F 2 "libreria_huellas_proyecto:Resistor_Horizontal_RM10mm" V 2015 6735 50  0001 C CNN
 F 3 "" H 2085 6735 50  0000 C CNN
 	1    2085 6735
 	1    0    0    -1  
@@ -314,7 +318,7 @@ U 1 1 5D4C6F2B
 P 3115 6585
 F 0 "P8" H 3115 6735 50  0000 C CNN
 F 1 "PINZA_7" V 3215 6585 50  0000 C CNN
-F 2 "Connect:bornier2" H 3115 6585 50  0001 C CNN
+F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 3115 6585 50  0001 C CNN
 F 3 "" H 3115 6585 50  0000 C CNN
 	1    3115 6585
 	-1   0    0    -1  
@@ -329,7 +333,7 @@ U 1 1 5D4C6F33
 P 3545 6745
 F 0 "C7" H 3570 6845 50  0000 L CNN
 F 1 "100nF" H 3570 6645 50  0000 L CNN
-F 2 "Capacitors_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 3583 6595 50  0001 C CNN
+F 2 "Capacitors_SMD:C_1206_HandSoldering" H 3583 6595 50  0001 C CNN
 F 3 "" H 3545 6745 50  0000 C CNN
 	1    3545 6745
 	1    0    0    -1  
@@ -340,7 +344,7 @@ U 1 1 5D4C6F39
 P 4005 6735
 F 0 "R6" V 4085 6735 50  0000 C CNN
 F 1 "10k" V 4005 6735 50  0000 C CNN
-F 2 "Resistors_ThroughHole:Resistor_Horizontal_RM10mm" V 3935 6735 50  0001 C CNN
+F 2 "libreria_huellas_proyecto:Resistor_Horizontal_RM10mm" V 3935 6735 50  0001 C CNN
 F 3 "" H 4005 6735 50  0000 C CNN
 	1    4005 6735
 	1    0    0    -1  
@@ -353,7 +357,7 @@ U 1 1 5D4CBA5C
 P 8250 1460
 F 0 "J4" H 8300 1760 50  0000 C CNN
 F 1 "Conn_02x05_Odd_Even" H 8300 1160 50  0000 C CNN
-F 2 "" H 8250 1460 50  0001 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_2x05_Pitch2.54mm" H 8250 1460 50  0001 C CNN
 F 3 "" H 8250 1460 50  0001 C CNN
 	1    8250 1460
 	1    0    0    -1  
@@ -556,7 +560,7 @@ U 1 1 5D4D9D45
 P 2355 4010
 F 0 "U1" H 2355 4210 50  0000 L CNN
 F 1 "LM358" H 2355 3810 50  0000 L CNN
-F 2 "" H 2355 4010 50  0001 C CNN
+F 2 "Housings_SOIC:SO-8_5.3x6.2mm_Pitch1.27mm" H 2355 4010 50  0001 C CNN
 F 3 "" H 2355 4010 50  0001 C CNN
 	1    2355 4010
 	1    0    0    -1  
@@ -568,8 +572,8 @@ L R R1
 U 1 1 5D4DA8E9
 P 1555 3705
 F 0 "R1" V 1635 3705 50  0000 C CNN
-F 1 "R" V 1555 3705 50  0000 C CNN
-F 2 "" V 1485 3705 50  0001 C CNN
+F 1 "4K7" V 1555 3705 50  0000 C CNN
+F 2 "Resistors_SMD:R_2512_HandSoldering" V 1485 3705 50  0001 C CNN
 F 3 "" H 1555 3705 50  0001 C CNN
 	1    1555 3705
 	1    0    0    -1  
@@ -579,8 +583,8 @@ L R R2
 U 1 1 5D4DAC16
 P 1555 4090
 F 0 "R2" V 1635 4090 50  0000 C CNN
-F 1 "R" V 1555 4090 50  0000 C CNN
-F 2 "" V 1485 4090 50  0001 C CNN
+F 1 "4K7" V 1555 4090 50  0000 C CNN
+F 2 "Resistors_SMD:R_2512_HandSoldering" V 1485 4090 50  0001 C CNN
 F 3 "" H 1555 4090 50  0001 C CNN
 	1    1555 4090
 	1    0    0    -1  
@@ -635,7 +639,7 @@ U 1 1 5D4DE405
 P 8855 2845
 F 0 "C10" H 8880 2945 50  0000 L CNN
 F 1 "100nF" H 8880 2745 50  0000 L CNN
-F 2 "Capacitors_THT:C_Disc_D5.0mm_W2.5mm_P5.00mm" H 8893 2695 50  0001 C CNN
+F 2 "Capacitors_SMD:C_1206_HandSoldering" H 8893 2695 50  0001 C CNN
 F 3 "" H 8855 2845 50  0000 C CNN
 	1    8855 2845
 	1    0    0    -1  
@@ -660,7 +664,7 @@ U 1 1 5D4DFAA3
 P 2970 4250
 F 0 "C5" H 2995 4350 50  0000 L CNN
 F 1 "10uF" H 2995 4150 50  0000 L CNN
-F 2 "Capacitors_THT:CP_Radial_D5.0mm_P2.00mm" H 2970 4250 50  0001 C CNN
+F 2 "Capacitors_SMD:C_2220_HandSoldering" H 2970 4250 50  0001 C CNN
 F 3 "" H 2970 4250 50  0000 C CNN
 	1    2970 4250
 	1    0    0    -1  
@@ -685,7 +689,7 @@ U 1 1 5D4E0BA3
 P 1195 4060
 F 0 "C1" H 1220 4160 50  0000 L CNN
 F 1 "10uF" H 1220 3960 50  0000 L CNN
-F 2 "Capacitors_THT:CP_Radial_D5.0mm_P2.00mm" H 1195 4060 50  0001 C CNN
+F 2 "Capacitors_SMD:C_2220_HandSoldering" H 1195 4060 50  0001 C CNN
 F 3 "" H 1195 4060 50  0000 C CNN
 	1    1195 4060
 	1    0    0    -1  
@@ -718,7 +722,7 @@ U 1 1 5D4E44A3
 P 1090 2395
 F 0 "P1" H 1090 2545 50  0000 C CNN
 F 1 "V_IN" V 1190 2395 50  0000 C CNN
-F 2 "Connect:bornier2" H 1090 2395 50  0001 C CNN
+F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 1090 2395 50  0001 C CNN
 F 3 "" H 1090 2395 50  0000 C CNN
 	1    1090 2395
 	-1   0    0    -1  
@@ -729,7 +733,7 @@ U 1 1 5D4E44A9
 P 2115 2595
 F 0 "C4" H 2140 2695 50  0000 L CNN
 F 1 "10uF" H 2140 2495 50  0000 L CNN
-F 2 "Capacitors_THT:CP_Radial_D5.0mm_P2.00mm" H 2115 2595 50  0001 C CNN
+F 2 "Capacitors_SMD:C_2220_HandSoldering" H 2115 2595 50  0001 C CNN
 F 3 "" H 2115 2595 50  0000 C CNN
 	1    2115 2595
 	1    0    0    -1  
@@ -740,7 +744,7 @@ U 1 1 5D4E44AF
 P 1840 2345
 F 0 "D1" H 1840 2445 50  0000 C CNN
 F 1 "schottky" H 1840 2245 50  0000 C CNN
-F 2 "Diodes_ThroughHole:Diode_DO-35_SOD27_Horizontal_RM10" H 1840 2345 50  0001 C CNN
+F 2 "Diodes_SMD:D_2114" H 1840 2345 50  0001 C CNN
 F 3 "" H 1840 2345 50  0000 C CNN
 	1    1840 2345
 	-1   0    0    1   
@@ -780,7 +784,7 @@ U 1 1 5D4E51E2
 P 5190 1920
 F 0 "U2" H 5540 2920 50  0000 C CNN
 F 1 "NANO" H 5190 2770 50  0000 C CNN
-F 2 "oscar_libreria_huellas:arduino_nano" H 4890 1120 50  0001 C CNN
+F 2 "libreria_huellas_proyecto:arduino_nano" H 4890 1120 50  0001 C CNN
 F 3 "DOCUMENTATION" H 5040 1070 50  0001 C CNN
 	1    5190 1920
 	1    0    0    -1  
