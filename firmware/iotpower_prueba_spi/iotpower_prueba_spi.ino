@@ -11,17 +11,20 @@
  *                                                    B1   rn   A1
  *                                                    B1   A1   03
  *                                                              
- * estado = 3 procesando y transmision de valores
- * Estado = 4 espera entre comuniaciones
+ * estado = 3 comprabar la trama recibida con final de trama:0xA1
+ * estado = 4 procesando y transmision de valores
+ *            primer valor el de menor peso           registros_recibidos[0]
+ *            segundo valor recibido el de mas peso   registros_recibidos[1]
+ * Estado = 5 espera entre comuniaciones
  */
-
+ 
 #define DEBUG 1
 
 #define DATOS 0x04
 
 #include <SPI.h>
 
-uint8_t datos_matrix[] = {0xA1,0xA2,0xA3,0xA4};
+uint8_t datos_matrix[] = {0xC1,0xC2,0xC3,0xC4};
 uint8_t datos_pendientes;
 uint32_t t_last_tx;
 
@@ -38,7 +41,7 @@ void setup (void)
   SPCR |= bit(SPIE);
 
   SPDR = 0x00;
-  datos_pendientes = DATOS;
+  datos_pendientes = 0;
 
 }  // end of setup
 
@@ -66,10 +69,10 @@ ISR (SPI_STC_vect){
     }
     else{
       datos_pendientes = 0;
-      SPDR = 0xA1;
+      SPDR = 0x55;
       if(DEBUG) {
         Serial.print("bit recibido =  "); Serial.println(c,HEX);
-        Serial.println("final conexion, datos_pendientes= 0  SPDR = 0xA1");
+        Serial.println("final conexion, datos_pendientes= 0  SPDR = 0x55");
       }
     }  
   }

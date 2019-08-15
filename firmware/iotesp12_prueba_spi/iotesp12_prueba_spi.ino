@@ -17,28 +17,35 @@
 #include <SPI.h>
 
 /*
- * diagrama de estados del servidor
+ * diagrama de estados del servidorº
  * ===============================
 
  * estado = 0 inicio de la comunicacion               B0   03   An  
  * estado = 1 confirmacion, cliente preparado         B1   An   r1  
  * estado = 2 recepción de registros                  B1   r1   r2
- *                                                    B1   rn   03
+ *                                                    B1   rn   A1
+ *                                                    B1   A1   03
  *                                                              
- * estado = 3 procesando y transmision de valores
- * Estado = 4 espera entre comuniaciones
+ * estado = 3 comprabar la trama recibida con final de trama:0xA1
+ * estado = 4 procesando y transmision de valores
+ *            primer valor el de menor peso           registros_recibidos[0]
+ *            segundo valor recibido el de mas peso   registros_recibidos[1]
+ * Estado = 5 espera entre comuniaciones
  */
+
 
 uint8_t estado;
 
-const int chipSelectPin = D0;
+const int chipSelectPin1 = D0;
+const int chipSelectPin2 = D1;
+int chip_seleccionado;
 
-uint8_t datos_dispositivo; 
-uint8_t datos_pendientes;
-uint8_t registros_recibidos[14];
+uint8_t datos_dispositivo;        // registros de datos del dispositivo slave
+uint8_t datos_pendientes;         // degistros pendientes de recibir desde eleslave
+uint8_t registros_recibidos[14];  // matriz para almacenar los datos recibidos
 String nombres_sesores[8]= {"pinza_1","pinza_2","pinza_3","pinza_4","pinza_5","pinza_6","pinza_7"};
 
-uint32_t t_last_tx;
+uint32_t t_last_tx;               // tiempo de la ultima transmision de datos
 
 void setup() {
   Serial.begin(9600);
@@ -46,14 +53,19 @@ void setup() {
   
   SPI.begin();
 
-  pinMode(chipSelectPin, OUTPUT);
-  digitalWrite(chipSelectPin, HIGH);
+  pinMode(chipSelectPin1, OUTPUT);
+  digitalWrite(chipSelectPin1, HIGH);
 
-  SPI.setClockDivider(SPI_CLOCK_DIV8);
+  pinMode(chipSelectPin2, OUTPUT);
+  digitalWrite(chipSelectPin2, HIGH);
+
+  SPI.setClockDivider(SPI_CLOCK_DIV8);  // 2 MHz
 
   datos_dispositivo = 0;
 
   t_last_tx=0;
+
+  chip_seleccionado = D0;
   
   estado = 0;
 
@@ -61,48 +73,53 @@ void setup() {
 }
 
 void loop() {
+  delay(100);
 
-/*
+
   uint32_t current_time= millis();
   
   if (current_time < t_last_tx) t_last_tx=0; 
   if (current_time - t_last_tx > 10000){  
     t_last_tx = current_time;
     estado = 0;
+    if(chip_seleccionado == D0) {chip_seleccionado = D1;}
+    else chip_seleccionado = D0;
     if(DEBUG){
-      Serial.print(F("******Print LCD - sgs: "));
+      Serial.print(F("******inicio comunicaciones estado=0 sgs: "));
       Serial.println(millis() / 1000);
       // Serial.print("freeRam: "); Serial.println(freeRam());   
-      Serial.flush();    
     } 
   }
 
-*/
   if(estado == 0){  //inicio de la comunicacion
     uint8_t registro_leido = readRegister(0xB0); 
     estado = 1;  
-     if(DEBUG) {Serial.print("Estado 0 -> Estado 1: "); Serial.println(registro_leido, HEX);}
-     delay(10);
+    if(DEBUG) {Serial.print("Estado 0 -> Estado 1: "); Serial.println(registro_leido, HEX);}
+    delay(10);
+    return;
   } 
   
   if(estado == 1){  // confirmacion
     uint8_t registro_leido = readRegister(0xB1); 
      
-    if ((registro_leido & 0xF0) == 0xA0){
+    if ((registro_leido & 0xF0) == 0xA0){         //priemera condicion para estado=2
       datos_dispositivo = registro_leido & 0x0F ;
       datos_pendientes = datos_dispositivo;
-      if(datos_dispositivo >= 2)estado = 2;
-      else estado=0;
+      if(datos_dispositivo >= 2)estado = 2;       //segunda condicion para estado=2
+      else estado = 0;
       if(DEBUG) {
-        Serial.print("Estado 1 -> Estado "); Serial.print(estado);
+        Serial.print("Estado 1 -> Estado: "); Serial.print(estado);
         Serial.print("  registro_leido: ");Serial.println((registro_leido), HEX);     
       }
     }
-    else {
+    else {                                        //no cumple la primera condicion
       estado = 0;
-      if(DEBUG) {Serial.print("Estado 1 -> Estado 0: "); Serial.println(registro_leido, HEX);}
+      if(DEBUG) {
+        Serial.print("Estado 1 -> Estado: "); Serial.print(estado);
+        Serial.print("  registro_leido: ");Serial.println((registro_leido), HEX);     
+      }
     }
-    //delay(100);
+    return;
   } 
   
   if(estado == 2){  //recepcion de registros
@@ -110,13 +127,13 @@ void loop() {
     if(datos_pendientes > 0){
       
       uint8_t registro_leido = readRegister(0xB1);
-      uint8_t registro_orden =datos_dispositivo - datos_pendientes;
+      uint8_t registro_orden = datos_dispositivo - datos_pendientes;
       registros_recibidos[registro_orden]=registro_leido;    
       datos_pendientes = datos_pendientes-1 ;
       estado = 2;
       if(DEBUG){
         Serial.print("iniciada, registros_recibidos[]: "); Serial.print(registro_orden);
-        Serial.print("  registro: "); Serial.println(registro_leido);
+        Serial.print("  registro: "); Serial.println(registro_leido,HEX);
       }
     } 
     else {
@@ -125,44 +142,33 @@ void loop() {
     }
     // uint32_t final_time= millis(); Serial.println(final_time - init_time);
     
-    delay(100);
+    // delay(100);
+    return;
   }
 
-
-
-// ********************
-
-  if(estado == 3){  //recepcion de registros
+  if(estado == 3){  //comprabar la trama recibida con final de trama:0x55
     
-      uint8_t registro_leido = readRegister(0xB1);
-      if(registro_leido == 0xA1){
-        estado = 4;
-        if(DEBUG){
-          Serial.print("Estado 3 -> Estado 4: ");Serial.print("transmision correcta ");
-          Serial.print("  registro: "); Serial.println(registro_leido,HEX);
-        }       
-      }
-      else{
-        estado=0;
-        if(DEBUG){   
-          Serial.print("Estado 3 -> Estado 0: "); Serial.print("transmision IN-correcta ");
-          Serial.print("  registro: "); Serial.println(registro_leido,HEX);
-        }       
-      }
-    
-    delay(100);
+    uint8_t registro_leido = readRegister(0xB1);
+    if(registro_leido == 0x55){
+      estado = 4;
+      if(DEBUG) {
+        Serial.print("Estado 3 -> Estado: "); Serial.print(estado);Serial.print("  trama correcta ");
+        Serial.print("  registro_leido: ");Serial.println((registro_leido), HEX);     
+      }      
+    }
+    else{
+      estado=0;
+      if(DEBUG) {
+        Serial.print("Estado 3 -> Estado: "); Serial.print(estado); Serial.print("trama IN-correcta ");
+        Serial.print("  registro_leido: ");Serial.println((registro_leido), HEX);     
+      }       
+    }
+
+    // delay(100);
+    return;
   }
-
-
-
-// *********************
-
-
-
-
   
-  
-  if(estado == 4){  //procesando y transmision de datos
+  if(estado == 4){  //procesando y transmision de valores
     
     uint16_t valor_t = 0;
     uint16_t valor_l = 0;
@@ -174,18 +180,18 @@ void loop() {
       valor_t = valor_l | valor_h;
       transmision(nombres_sesores[n/2]+":"+ String(int(valor_t)));    
     }
-    estado=0;
-    delay(1000);       
+    estado=5;
+    return;       
   }  
 }
 
 unsigned int readRegister(uint8_t a) {
   
   uint8_t result = 0;
-  digitalWrite(chipSelectPin, LOW);
+  digitalWrite(chip_seleccionado, LOW);
   delay(5);
   result = SPI.transfer(a); // (unsigned int)
-  digitalWrite(chipSelectPin, HIGH);
+  digitalWrite(chip_seleccionado, HIGH);
   
   // Serial.print("register value: ");
   // Serial.println(result);
