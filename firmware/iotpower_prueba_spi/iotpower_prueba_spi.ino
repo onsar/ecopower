@@ -2,16 +2,28 @@
 
 
 /*
+ * Descubrimiento de esclavos
+ * ===============================
+
+ * estado = 0 inicio de la comunicacion       (sensores?)               B0   55   An  
+ * estado = 1 confirmacion esclavo preparado  (final de comunicacion)   B8   An   55  
+ * estado = 2 comprobacion, final de comunicacion                       B8   55   55
+ * estado = 3 espera entre comuniaciones                                                            
+ */
+
+
+ /*
  * diagrama de estados del servidor
  * ===============================
 
- * estado = 0 inicio de la comunicacion               B0   03   An  
- * estado = 1 confirmacion, cliente preparado         B1   An   r1  
- * estado = 2 recepción de registros                  B1   r1   r2
- *                                                    B1   rn   A1
- *                                                    B1   A1   03
+ * estado = 0 inicio de la comunicacion       (sensores?)               B0   55   An  
+ * estado = 1 confirmacion, cliente preparado (siguente registro)       B1   An   r1  
+ * estado = 2 recepción de registros          (siguente registro)       B1   r1   r2
+ *                                            (siguente registro)       B1   r2   r3
+ *                                            (siguente registro)       B1   r3   rn
+ *                                            (suma de registros)       B1   rn   suma
+ * estado = 3 comprabar la trama recibida     (final de comunicacion)   B8   suma 55
  *                                                              
- * estado = 3 comprabar la trama recibida con final de trama:0xA1
  * estado = 4 procesando y transmision de valores
  *            primer valor el de menor peso           registros_recibidos[0]
  *            segundo valor recibido el de mas peso   registros_recibidos[1]
@@ -20,12 +32,13 @@
  
 #define DEBUG 1
 
-#define DATOS 0x04
+#define DATOS 0x06
 
 #include <SPI.h>
 
-uint8_t datos_matrix[] = {0xC1,0xC2,0xC3,0xC4};
+uint8_t datos_matrix[] = {0xB1,0xB2,0xB3,0xB4,0xB5,0xB6};
 uint8_t datos_pendientes;
+
 uint32_t t_last_tx;
 
 void setup (void)
@@ -50,17 +63,19 @@ void setup (void)
 ISR (SPI_STC_vect){
   byte c = SPDR;
   
-  if(c==0xB0){ // inicio
-    
+  if(c==0xB0){ // inicio  
     datos_pendientes = DATOS;
     SPDR = 0xA0 | DATOS;
-    if(DEBUG) {Serial.print("inicio, datos_pendientes:   ");Serial.println("reseteo");}
+    if(DEBUG) {
+      Serial.print("bit recibido =  "); Serial.println(c,HEX);
+      Serial.print("datos_pendientes =  "); Serial.println(datos_pendientes);
+    }
   }
 
   if(c==0xB1){// transmision iniciada
     
     if(datos_pendientes > 0) {
-      SPDR = datos_matrix[DATOS - datos_pendientes];
+      SPDR = datos_matrix[DATOS - datos_pendientes];  // 4-4=0, 4-3=1, 4-2=2, 4-1=3,
       datos_pendientes = datos_pendientes-1;
       if(DEBUG) {
         Serial.print("bit recibido =  "); Serial.println(c,HEX);
@@ -68,15 +83,24 @@ ISR (SPI_STC_vect){
       }
     }
     else{
+      uint8_t registros_suma = sumar_registros();
+      SPDR = registros_suma;
       datos_pendientes = 0;
-      SPDR = 0x55;
       if(DEBUG) {
         Serial.print("bit recibido =  "); Serial.println(c,HEX);
-        Serial.println("final conexion, datos_pendientes= 0  SPDR = 0x55");
+        Serial.print("registros_suma:  ");Serial.println(registros_suma,HEX);
       }
     }  
   }
-  //Serial.print("bit recibido =  "); Serial.println(c,HEX);
+
+  if(c==0xB8){ // reset   
+    SPDR = 0x55;
+    datos_pendientes = 0;
+    if(DEBUG) {
+      Serial.print("bit recibido =  "); Serial.println(c,HEX);
+      Serial.println(" ***reset  ");
+    }
+  }
 
 }  // end of interrupt service routine (ISR) SPI_STC_vect
 
@@ -99,3 +123,15 @@ void loop (void)
 
 */
 }  // end of loop
+
+uint8_t sumar_registros(){
+  uint8_t suma = 0;
+  for(uint8_t n=0; n < DATOS; n++){
+    suma = suma + datos_matrix[n];
+  }
+  Serial.print("suma: "); Serial.println(suma,HEX);
+  return suma;
+}
+
+
+  
