@@ -101,7 +101,7 @@ F 1 "PINZA_1" V 1295 5625 50  0000 C CNN
 F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 1195 5625 50  0001 C CNN
 F 3 "" H 1195 5625 50  0000 C CNN
 	1    1195 5625
-	-1   0    0    -1  
+	-1   0    0    1   
 $EndComp
 Text Label 2195 5990 0    60   ~ 0
 v_referencia
@@ -136,7 +136,7 @@ F 1 "PINZA_2" V 3215 5625 50  0000 C CNN
 F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 3115 5625 50  0001 C CNN
 F 3 "" H 3115 5625 50  0000 C CNN
 	1    3115 5625
-	-1   0    0    -1  
+	-1   0    0    1   
 $EndComp
 Text Label 4085 5575 0    60   ~ 0
 intensidad_2
@@ -173,7 +173,7 @@ F 1 "PINZA_3" V 5135 5625 50  0000 C CNN
 F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 5035 5625 50  0001 C CNN
 F 3 "" H 5035 5625 50  0000 C CNN
 	1    5035 5625
-	-1   0    0    -1  
+	-1   0    0    1   
 $EndComp
 Text Label 6005 5575 0    60   ~ 0
 intensidad_3
@@ -210,7 +210,7 @@ F 1 "PINZA_4" V 7055 5625 50  0000 C CNN
 F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 6955 5625 50  0001 C CNN
 F 3 "" H 6955 5625 50  0000 C CNN
 	1    6955 5625
-	-1   0    0    -1  
+	-1   0    0    1   
 $EndComp
 Text Label 7925 5575 0    60   ~ 0
 intensidad_4
@@ -249,7 +249,7 @@ F 1 "PINZA_5" V 9020 5625 50  0000 C CNN
 F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 8920 5625 50  0001 C CNN
 F 3 "" H 8920 5625 50  0000 C CNN
 	1    8920 5625
-	-1   0    0    -1  
+	-1   0    0    1   
 $EndComp
 Text Label 9890 5575 0    60   ~ 0
 intensidad_5
@@ -286,7 +286,7 @@ F 1 "PINZA_6" V 1295 6585 50  0000 C CNN
 F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 1195 6585 50  0001 C CNN
 F 3 "" H 1195 6585 50  0000 C CNN
 	1    1195 6585
-	-1   0    0    -1  
+	-1   0    0    1   
 $EndComp
 Text Label 2195 6950 0    60   ~ 0
 v_referencia
@@ -321,7 +321,7 @@ F 1 "PINZA_7" V 3215 6585 50  0000 C CNN
 F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 3115 6585 50  0001 C CNN
 F 3 "" H 3115 6585 50  0000 C CNN
 	1    3115 6585
-	-1   0    0    -1  
+	-1   0    0    1   
 $EndComp
 Text Label 4085 6535 0    60   ~ 0
 intensidad_7
@@ -357,7 +357,7 @@ U 1 1 5D4CBA5C
 P 7890 1940
 F 0 "J4" H 7940 2240 50  0000 C CNN
 F 1 "Conn_02x05_Odd_Even" H 7940 1640 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x05_Pitch2.54mm" H 7890 1940 50  0001 C CNN
+F 2 "oscar_libreria_huellas:Pin_Header_Straight_2x05_Pitch2.54mm_onsar" H 7890 1940 50  0001 C CNN
 F 3 "" H 7890 1940 50  0001 C CNN
 	1    7890 1940
 	1    0    0    -1  
@@ -562,7 +562,7 @@ F 1 "V_IN" V 1190 2395 50  0000 C CNN
 F 2 "Connectors_Terminal_Blocks:TerminalBlock_bornier-2_P5.08mm" H 1090 2395 50  0001 C CNN
 F 3 "" H 1090 2395 50  0000 C CNN
 	1    1090 2395
-	-1   0    0    -1  
+	-1   0    0    1   
 $EndComp
 $Comp
 L CP1 C4
@@ -1027,4 +1027,61 @@ Wire Wire Line
 Wire Wire Line
 	7690 2140 7455 2140
 NoConn ~ 7255 1840
+$Comp
+L Conn_02x05_Odd_Even J5
+U 1 1 5D6D477F
+P 7905 2740
+F 0 "J5" H 7955 3040 50  0000 C CNN
+F 1 "Conn_02x05_Odd_Even" H 7955 2440 50  0000 C CNN
+F 2 "oscar_libreria_huellas:Pin_Header_Straight_2x05_Pitch2.54mm_onsar" H 7905 2740 50  0001 C CNN
+F 3 "" H 7905 2740 50  0001 C CNN
+	1    7905 2740
+	1    0    0    -1  
+$EndComp
+Text Label 8240 2840 0    60   ~ 0
+mosi
+Text Label 8240 2940 0    60   ~ 0
+miso
+Text Label 7470 2940 0    60   ~ 0
+sck
+Text Label 8240 2740 0    60   ~ 0
+esp_d0
+Text Label 8235 2640 0    60   ~ 0
+esp_d1
+Text Label 8235 2540 0    60   ~ 0
+esp_d2
+$Comp
+L GND #PWR015
+U 1 1 5D6D478C
+P 7270 2840
+F 0 "#PWR015" H 7270 2590 50  0001 C CNN
+F 1 "GND" H 7270 2690 50  0000 C CNN
+F 2 "" H 7270 2840 50  0001 C CNN
+F 3 "" H 7270 2840 50  0001 C CNN
+	1    7270 2840
+	1    0    0    -1  
+$EndComp
+NoConn ~ 7270 2740
+Wire Wire Line
+	8205 2740 8640 2740
+Wire Wire Line
+	8205 2940 8640 2940
+Wire Wire Line
+	7270 2540 7705 2540
+Wire Wire Line
+	7270 2640 7705 2640
+Wire Wire Line
+	7270 2740 7705 2740
+Wire Wire Line
+	7270 2840 7705 2840
+Wire Wire Line
+	8205 2540 8640 2540
+Wire Wire Line
+	8205 2640 8640 2640
+Wire Wire Line
+	8205 2840 8640 2840
+Wire Wire Line
+	7705 2940 7470 2940
+NoConn ~ 7270 2640
+NoConn ~ 7270 2540
 $EndSCHEMATC
