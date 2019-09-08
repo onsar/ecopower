@@ -39,10 +39,10 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title ""
+Title "EcoPower"
 Date ""
 Rev ""
-Comp ""
+Comp "iotlibre"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -323,27 +323,14 @@ F 3 "" H 3115 6585 50  0000 C CNN
 	1    3115 6585
 	-1   0    0    1   
 $EndComp
-Text Label 4085 6535 0    60   ~ 0
-intensidad_7
 Text Label 4115 6950 0    60   ~ 0
 v_referencia
-$Comp
-L C C7
-U 1 1 5D4C6F33
-P 3545 6745
-F 0 "C7" H 3570 6845 50  0000 L CNN
-F 1 "100nF" H 3570 6645 50  0000 L CNN
-F 2 "Capacitors_SMD:C_1206_HandSoldering" H 3583 6595 50  0001 C CNN
-F 3 "" H 3545 6745 50  0000 C CNN
-	1    3545 6745
-	1    0    0    -1  
-$EndComp
 $Comp
 L R R6
 U 1 1 5D4C6F39
 P 4005 6735
 F 0 "R6" V 4085 6735 50  0000 C CNN
-F 1 "10k" V 4005 6735 50  0000 C CNN
+F 1 "1k" V 4005 6735 50  0000 C CNN
 F 2 "libreria_huellas_proyecto:Resistor_Horizontal_RM10mm" V 3935 6735 50  0001 C CNN
 F 3 "" H 4005 6735 50  0000 C CNN
 	1    4005 6735
@@ -432,7 +419,7 @@ U 1 1 5D4DA8E9
 P 1555 3705
 F 0 "R1" V 1635 3705 50  0000 C CNN
 F 1 "4K7" V 1555 3705 50  0000 C CNN
-F 2 "Resistors_SMD:R_2512_HandSoldering" V 1485 3705 50  0001 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" V 1485 3705 50  0001 C CNN
 F 3 "" H 1555 3705 50  0001 C CNN
 	1    1555 3705
 	1    0    0    -1  
@@ -443,7 +430,7 @@ U 1 1 5D4DAC16
 P 1555 4090
 F 0 "R2" V 1635 4090 50  0000 C CNN
 F 1 "4K7" V 1555 4090 50  0000 C CNN
-F 2 "Resistors_SMD:R_2512_HandSoldering" V 1485 4090 50  0001 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" V 1485 4090 50  0001 C CNN
 F 3 "" H 1555 4090 50  0001 C CNN
 	1    1555 4090
 	1    0    0    -1  
@@ -637,8 +624,6 @@ Text Label 6010 1920 0    60   ~ 0
 intensidad_5
 Text Label 6010 1820 0    60   ~ 0
 intensidad_6
-Text Label 6010 1720 0    60   ~ 0
-intensidad_7
 Text Label 6000 1620 0    60   ~ 0
 v_referencia
 Text Label 3930 2520 0    60   ~ 0
@@ -677,7 +662,7 @@ U 1 1 5D67AD9E
 P 9490 1855
 F 0 "R12" V 9570 1855 50  0000 C CNN
 F 1 "4K7" V 9490 1855 50  0000 C CNN
-F 2 "Resistors_SMD:R_2512_HandSoldering" V 9420 1855 50  0001 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" V 9420 1855 50  0001 C CNN
 F 3 "" H 9490 1855 50  0001 C CNN
 	1    9490 1855
 	1    0    0    -1  
@@ -712,7 +697,7 @@ U 1 1 5D683292
 P 9135 1065
 F 0 "R11" V 9215 1065 50  0000 C CNN
 F 1 "4K7" V 9135 1065 50  0000 C CNN
-F 2 "Resistors_SMD:R_2512_HandSoldering" V 9065 1065 50  0001 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" V 9065 1065 50  0001 C CNN
 F 3 "" H 9135 1065 50  0001 C CNN
 	1    9135 1065
 	1    0    0    -1  
@@ -751,7 +736,7 @@ U 1 1 5D6833D1
 P 9895 2605
 F 0 "R13" V 9975 2605 50  0000 C CNN
 F 1 "4K7" V 9895 2605 50  0000 C CNN
-F 2 "Resistors_SMD:R_2512_HandSoldering" V 9825 2605 50  0001 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" V 9825 2605 50  0001 C CNN
 F 3 "" H 9895 2605 50  0001 C CNN
 	1    9895 2605
 	1    0    0    -1  
@@ -854,14 +839,9 @@ Wire Wire Line
 	3315 6950 4365 6950
 Wire Wire Line
 	3315 6635 3315 6950
-Wire Wire Line
-	3315 6535 4365 6535
 Connection ~ 4005 6535
 Wire Wire Line
 	4005 6585 4005 6535
-Connection ~ 3545 6535
-Wire Wire Line
-	3545 6595 3545 6535
 Wire Wire Line
 	8190 1940 8625 1940
 Wire Wire Line
@@ -984,9 +964,6 @@ Wire Wire Line
 	2085 6885 2085 6950
 Connection ~ 2085 6950
 Wire Wire Line
-	3545 6895 3545 6950
-Connection ~ 3545 6950
-Wire Wire Line
 	4005 6885 4005 6950
 Connection ~ 4005 6950
 Wire Wire Line
@@ -1084,4 +1061,23 @@ Wire Wire Line
 	7705 2940 7470 2940
 NoConn ~ 7270 2640
 NoConn ~ 7270 2540
+Text Label 4120 6535 0    60   ~ 0
+voltage_1
+$Comp
+L R R10
+U 1 1 5D7208D8
+P 3625 6535
+F 0 "R10" V 3705 6535 50  0000 C CNN
+F 1 "10k" V 3625 6535 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206_HandSoldering" V 3555 6535 50  0001 C CNN
+F 3 "" H 3625 6535 50  0000 C CNN
+	1    3625 6535
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3315 6535 3475 6535
+Wire Wire Line
+	3775 6535 4365 6535
+Text Label 6000 1720 0    60   ~ 0
+voltage_1
 $EndSCHEMATC
