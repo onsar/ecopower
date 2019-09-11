@@ -1,4 +1,4 @@
-update=mié 11 sep 2019 11:43:26 CEST
+update=mié 11 sep 2019 10:58:08 CEST
 version=1
 last_client=kicad
 [cvpcb]
@@ -9,11 +9,11 @@ version=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
-LastNetListRead=wat.net
-PadDrill=1.00076
-PadDrillOvalY=1.00076
-PadSizeH=2
-PadSizeV=2
+LastNetListRead=ecomodbus.net
+PadDrill=0
+PadDrillOvalY=0
+PadSizeH=4
+PadSizeV=3
 PcbTextSizeV=1.5
 PcbTextSizeH=1.5
 PcbTextThickness=0.3
@@ -27,9 +27,9 @@ BoardOutlineThickness=0.15
 ModuleOutlineThickness=0.15
 [eeschema]
 version=1
-LibDir=../oscar_libreria_huellas.pretty;../oscar_libreria.pretty
+LibDir=../../ecopower/hardware/libreria_huellas_proyecto.pretty
 [eeschema/libraries]
-LibName1=wat-rescue
+LibName1=ecoBeat_3-rescue
 LibName2=power
 LibName3=device
 LibName4=transistors
@@ -59,17 +59,5 @@ LibName27=opto
 LibName28=atmel
 LibName29=contrib
 LibName30=valves
-LibName31=recom-rd
-LibName32=RO-1224S
-LibName33=/home/onsar/git_hub/osec/hardware/oscar_libreria.pretty/mp-1584
-LibName34=nano
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
-LabSize=60
+LibName31=library/wemos_mini
+LibName32=library/ecomodbus
