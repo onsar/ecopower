@@ -215,21 +215,10 @@ L C C2
 U 1 1 5A8494AE
 P 8550 4000
 F 0 "C2" H 8575 4100 50  0000 L CNN
-F 1 "10uF" H 8575 3900 50  0000 L CNN
+F 1 "0,1uF" H 8575 3900 50  0000 L CNN
 F 2 "Capacitors_ThroughHole:C_Disc_D3_P2.5" H 8588 3850 50  0001 C CNN
 F 3 "" H 8550 4000 50  0000 C CNN
 	1    8550 4000
-	1    0    0    -1  
-$EndComp
-$Comp
-L C C3
-U 1 1 5A8495F3
-P 9350 4000
-F 0 "C3" H 9375 4100 50  0000 L CNN
-F 1 "10uF" H 9375 3900 50  0000 L CNN
-F 2 "Capacitors_ThroughHole:C_Disc_D3_P2.5" H 9388 3850 50  0001 C CNN
-F 3 "" H 9350 4000 50  0000 C CNN
-	1    9350 4000
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -323,17 +312,6 @@ Text GLabel 9450 3650 1    60   Input ~ 0
 3.3
 Text GLabel 10150 5350 1    60   Input ~ 0
 3.3
-$Comp
-L VCC #PWR015
-U 1 1 5AA98C74
-P 7700 3550
-F 0 "#PWR015" H 7700 3400 50  0001 C CNN
-F 1 "VCC" H 7700 3700 50  0000 C CNN
-F 2 "" H 7700 3550 50  0000 C CNN
-F 3 "" H 7700 3550 50  0000 C CNN
-	1    7700 3550
-	1    0    0    -1  
-$EndComp
 $Comp
 L D D1
 U 1 1 5AAA6483
@@ -436,9 +414,6 @@ Wire Wire Line
 Wire Wire Line
 	8200 4050 8200 4200
 Connection ~ 8550 4200
-Wire Wire Line
-	7700 3950 7700 3550
-Connection ~ 7700 3950
 Wire Wire Line
 	8200 3950 8100 3950
 Wire Notes Line
@@ -670,4 +645,15 @@ NoConn ~ 4945 4555
 NoConn ~ 4945 4655
 Text Label 3035 2090 0    60   ~ 0
 esp_rst
+$Comp
+L CP C?
+U 1 1 5D7BE6AD
+P 9350 4000
+F 0 "C?" H 9375 4100 50  0000 L CNN
+F 1 "10uF" H 9375 3900 50  0000 L CNN
+F 2 "" H 9388 3850 50  0001 C CNN
+F 3 "" H 9350 4000 50  0001 C CNN
+	1    9350 4000
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
