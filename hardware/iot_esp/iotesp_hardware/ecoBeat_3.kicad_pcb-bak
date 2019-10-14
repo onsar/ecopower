@@ -3,7 +3,7 @@
   (general
     (links 18)
     (no_connects 0)
-    (area 44.984599 31.268599 112.698601 89.991001)
+    (area 28.014801 29.109999 128.420801 109.329201)
     (thickness 1.6)
     (drawings 26)
     (tracks 104)
@@ -80,7 +80,7 @@
     (grid_origin 221.6404 115.9764)
     (visible_elements FFFFFFFF)
     (pcbplotparams
-      (layerselection 0x290e0_80000001)
+      (layerselection 0x2d030_80000001)
       (usegerberextensions false)
       (excludeedgelayer true)
       (linewidth 0.100000)
@@ -103,7 +103,7 @@
       (mirror false)
       (drillshape 0)
       (scaleselection 1)
-      (outputdirectory /home/onsar/onsar_git/iotlibre/EcoModbus/ecomodbus_hardware/PCB/gerber/))
+      (outputdirectory /home/onsar/onsar_git/onsar/ecopower/hardware/iot_esp/iotesp_modbus_hardware/gerber))
   )
 
   (net 0 "")

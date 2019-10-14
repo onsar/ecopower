@@ -1,9 +1,9 @@
-(kicad_pcb (version 4) (host pcbnew 4.0.7-e2-6376~61~ubuntu18.04.1)
+(kicad_pcb (version 4) (host pcbnew 4.0.2+dfsg1-stable)
 
   (general
     (links 18)
     (no_connects 0)
-    (area 28.014801 29.109999 128.420801 109.329201)
+    (area 27.864801 29.109999 128.5484 109.329201)
     (thickness 1.6)
     (drawings 26)
     (tracks 104)
@@ -43,7 +43,7 @@
   )
 
   (setup
-    (last_trace_width 1)
+    (last_trace_width 0.8)
     (user_trace_width 0.1)
     (user_trace_width 0.2)
     (user_trace_width 0.3)
@@ -80,7 +80,7 @@
     (grid_origin 221.6404 115.9764)
     (visible_elements FFFFFFFF)
     (pcbplotparams
-      (layerselection 0x2d030_80000001)
+      (layerselection 0x3ffff_80000001)
       (usegerberextensions false)
       (excludeedgelayer true)
       (linewidth 0.100000)
@@ -103,7 +103,7 @@
       (mirror false)
       (drillshape 0)
       (scaleselection 1)
-      (outputdirectory /home/onsar/onsar_git/onsar/ecopower/hardware/iot_esp/iotesp_modbus_hardware/gerber))
+      (outputdirectory /home/onsar/onsar_git/onsar/ecopower/hardware/iot_esp/iotesp_hardware/gerber/))
   )
 
   (net 0 "")
