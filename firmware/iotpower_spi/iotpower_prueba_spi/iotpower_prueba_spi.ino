@@ -36,7 +36,7 @@
 
 #include <SPI.h>
 
-uint8_t datos_matrix[] = {0xB1,0xB2,0xB3,0xB4,0xB5,0xB6};
+uint8_t datos_matrix[] = {0xC1,0xC2,0xC3,0xC4,0xC5,0xC6};
 uint8_t datos_pendientes;
 
 uint32_t t_last_tx;
@@ -83,7 +83,7 @@ ISR (SPI_STC_vect){
       }
     }
     else{
-      uint8_t registros_suma = sumar_registros();
+      uint8_t registros_suma  = sumar_registros();
       SPDR = registros_suma;
       datos_pendientes = 0;
       if(DEBUG) {

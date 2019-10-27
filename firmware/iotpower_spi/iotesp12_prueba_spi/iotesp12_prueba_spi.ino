@@ -47,17 +47,18 @@
 
 #include <SPI.h>
 
+
 // Datos de los esclavos
 typedef struct { 
   int pin_seleccion;
   int numero_sensores;
-  String nombres_sesores[7];
+  char nombres_sesores[7][4]; // 3 + el final de string
 } esclavo;
 
-esclavo es1= {D0,0,"pinza_11","pinza_12","pinza_13","pinza_14","pinza_15","pinza_16","pinza_17"};
-esclavo es2= {D1,0,"pinza_21","pinza_22","pinza_23","pinza_24","pinza_25","pinza_26","pinza_27"};
-esclavo es3= {D2,0,"pinza_31","pinza_32","pinza_33","pinza_34","pinza_35","pinza_36","pinza_37"};
-esclavo es4= {D8,0,"pinza_41","pinza_42","pinza_43","pinza_44","pinza_45","pinza_46","pinza_47"};
+esclavo es1= {D0,0,"p0","p1","p2","p3","p4","p5","v0"};
+esclavo es2= {D1,0,"p10","p11","p12","p13","p14","p15","p16"};
+esclavo es3= {D2,0,"p20","p21","p22","p23","p24","p25","p26"};
+esclavo es4= {D8,0,"p30","p31","p32","p33","p34","p35","p36"};
 
 esclavo* esclavos_[] = {&es1, &es2, &es3, &es4};
 
@@ -82,7 +83,6 @@ void setup() {
   Serial.begin(9600);
   Serial.println ("Starting");
   spi_setup();
-  
 }
 
 void loop() {
@@ -97,17 +97,22 @@ uint8_t readRegister(uint8_t b, int e) { // b=byte a transmitir e= esclavo
   digitalWrite(esclavos_[e]->pin_seleccion, LOW);
   delay(10);
   result = SPI.transfer(b); // (unsigned int)
+  delay(10);
   digitalWrite(esclavos_[e]->pin_seleccion, HIGH);
   delay(5);
   return (result);
 }
 
 void transmision(String this_string){
-  
   Serial.println("valor a transmitir: ");
   Serial.println(this_string);
 }
 
+void reset_seleccion_esclavo(){
+  for(int n= 0; n < max_esclavos; n++){
+    digitalWrite(esclavos_[n]->pin_seleccion, HIGH); 
+  }   
+}
 
 void spi_setup(){
   
@@ -115,13 +120,11 @@ void spi_setup(){
 
   SPI.setClockDivider(SPI_CLOCK_DIV8);  // 2 MHz
 
-  // pines de selección (SS) a a 5V
-
+  // pines de selección (SS) a 5V
   for(int n= 0; n < max_esclavos; n++){
     pinMode(esclavos_[n]->pin_seleccion, OUTPUT);
-    digitalWrite(esclavos_[n]->pin_seleccion, HIGH); 
-    }
-    
+  } 
+  reset_seleccion_esclavo();  
   delay(1000);  
   
   
@@ -132,18 +135,17 @@ void spi_setup(){
   for(int n= 0; n < max_esclavos; n++){  
     uint8_t registro_leido = 0x00; 
 
-    digitalWrite(esclavos_[n]->pin_seleccion, LOW); delay(10);    // seleccion de esclavo
-    registro_leido = SPI.transfer(0xB0);                          // inicio de la comunicacion
+    registro_leido = readRegister(0xB0, n);
     if(DEBUG) {
-      Serial.print("inicio descubrimiento, registro_leido: "); 
+      Serial.print("inicio descubrimiento, B0 registro: "); 
       Serial.println(registro_leido, HEX);
     }
 
-    registro_leido = SPI.transfer(0xB8);                          // confirmacion de esclavo preparado
+    registro_leido = readRegister(0xB8, n);
     if(((registro_leido & 0xF0) == 0xA0)&&((registro_leido & 0x0F) >= 2)){
       esclavos_[n]->numero_sensores = registro_leido & 0x0F; 
       if(DEBUG){
-        Serial.print("esclavo preparado, registro_leido: "); 
+        Serial.print("esclavo preparado, B8 registro: "); 
         Serial.println(registro_leido, HEX);
       }
     }
@@ -152,24 +154,23 @@ void spi_setup(){
         Serial.print("esclavo NO-preparado, registro_leido: "); 
         Serial.println(registro_leido, HEX);
       }
-      digitalWrite(esclavos_[n]->pin_seleccion, HIGH);
       break;
     }
-  
-    registro_leido = SPI.transfer(0xB8);                     //comprobacion, final de comunicacion 
+    
+    registro_leido = readRegister(0xB8, n);
     if(DEBUG){
-      Serial.print("reset esclavo, registro_leido: "); 
+      Serial.print("reset esclavo, B8 registro_leido: "); 
       Serial.println(registro_leido, HEX);
     }
     if (registro_leido == 0x55){
-      numero_esclavos = n+1;
-      digitalWrite(esclavos_[n]->pin_seleccion, HIGH);      
+      numero_esclavos = n+1;  
     }
     else{
-      digitalWrite(esclavos_[n]->pin_seleccion, HIGH);
       break; 
     }
   }
+
+  Serial.print("ESCALVOS DETECTADOS: ");  Serial.println(numero_esclavos);
 
   // CONFIGURACION DE LAS VARIABLES INICIALES
 
@@ -184,22 +185,24 @@ void spi_setup(){
 void spi_loop(){
   
   // EJECUCION EN BASE A TIEMPOS
-
   uint32_t current_time= millis();  
   if (current_time < t_last_tx) t_last_tx=0;         // para el desbordamiento de millis()
   if (current_time - t_last_tx > 10000){             // inicio de la lectura del esclavo
     t_last_tx = current_time;
-    
+
+    // Un esclavo cada vez
     posicion_esclavo++;                              
     if ( posicion_esclavo > (numero_esclavos-1)) {posicion_esclavo=0;}  
+
+    // inicio de los estados
+    estado = 0;
+
+    // configuracion inicial de los registros
     registros_esclavo = 0;
     for(int n=0; n<14; n++){registros_recibidos[n] = 0x00;}   
     registros_pendientes = 0;
     registros_suma = 0;
 
-    estado = 0;
-
-    
     if(DEBUG){
       Serial.print(F("******inicio comunicaciones estado=0 sgs: "));
       Serial.println(millis() / 1000);
@@ -209,21 +212,24 @@ void spi_loop(){
   }
 
   if(estado == 0){  //inicio de la comunicacion
-    // uint8_t registro_leido = readRegister(0xB0, posicion_esclavo); 
     uint8_t registro_leido = 0x00;
-    digitalWrite(esclavos_[posicion_esclavo]->pin_seleccion, LOW); delay(10);    // seleccion de esclavo
-    registro_leido = SPI.transfer(0xB0);                          // inicio de la comunicacion
+    registro_leido = readRegister(0xB0, posicion_esclavo); 
+    // digitalWrite(esclavos_[posicion_esclavo]->pin_seleccion, LOW); delay(10);    // seleccion de esclavo
+    // registro_leido = SPI.transfer(0xB0);                          // inicio de la comunicacion
     
     estado = 1;  
     if(DEBUG) {Serial.print("Estado 0 -> Estado 1: "); Serial.println(registro_leido, HEX);}
-    delay(10);
+    // delay(10);
     return;
   } 
   
   if(estado == 1){  // confirmacion
 
     uint8_t registro_leido = 0x00;
-    registro_leido = SPI.transfer(0xB0);                          // inicio de la comunicacion
+    registro_leido = readRegister(0xB1, posicion_esclavo); 
+
+    // uint8_t registro_leido = 0x00;
+    // registro_leido = SPI.transfer(0xB1);                          // inicio de la comunicacion
     if(((registro_leido & 0xF0) == 0xA0)&&((registro_leido & 0x0F) >= 2)){   
       registros_esclavo = registro_leido & 0x0F;
       registros_pendientes = registros_esclavo;  
@@ -231,10 +237,10 @@ void spi_loop(){
     }       
     else{
       estado = 5;
-      if(DEBUG){
-        Serial.print("Estado 1 -> Estado: "); Serial.print(estado);
-        Serial.print("  registro_leido: ");Serial.println((registro_leido), HEX);     
-      }
+    }
+    if(DEBUG){
+      Serial.print("Estado 1 -> Estado: "); Serial.print(estado);
+      Serial.print("  registro: ");Serial.println((registro_leido), HEX);     
     }
     return;
   } 
@@ -301,7 +307,9 @@ void spi_loop(){
       valor_h = uint16_t(registros_recibidos[n]);
       valor_h = valor_h << 8;
       valor_t = valor_l | valor_h;
-      transmision(esclavos_[posicion_esclavo]->nombres_sesores[n/2]+":"+ String(int(valor_t)));    
+      String nombre_sensor = (esclavos_[posicion_esclavo]->nombres_sesores[n/2]);
+      transmision(nombre_sensor +":"+ String(int(valor_t))); 
+      // transmision(esclavos_[posicion_esclavo]->nombres_sesores[n/2]+":"+ String(int(valor_t)));    
     }
     estado=5;
     return;       
