@@ -183,7 +183,6 @@ double EnergyMonitor::calcIrms(unsigned int Number_of_Samples)
     int SupplyVoltage = readVcc();
   #endif
 
-  offsetI = analogRead(A7);
   int enable_sumI = 0;
   // uint32_t t_init = millis();
   

@@ -96,7 +96,7 @@ void buildPowerMessage(uint8_t output){
         Serial.println (analog_inputs[i].name_input+ ":" + power_result); 
         Serial.flush();     
       }
-      Serial.println (analog_inputs[i].name_input+ ":" + power_result);
+      wifiSerialInit.println (analog_inputs[i].name_input+ ":" + power_result);
       analog_inputs[i].power_sum = 0;
       analog_inputs[i].power_measurements = 0;
       

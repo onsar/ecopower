@@ -1,3 +1,13 @@
+/*
+
+Sketchbook location
+/home/onsar/git/onsar/ecopower/firmware/iotpower_serial/iotpow_serial
+
+
+*/
+
+
+
 #define DEBUG 1
 
 #define BPS 115200 //Velocidad de las comunicaciones
@@ -16,6 +26,19 @@
 #define TXPIN 5
 SoftwareSerial wifiSerialInit (RXPIN,TXPIN);
 */
+
+/* D12 MISO  -> e_rx (D5)
+ * D11 MOSI  -> e_tx (D6)
+ */
+
+
+
+
+#include <SoftwareSerial.h>
+#define RXPIN 11
+#define TXPIN 12
+SoftwareSerial wifiSerialInit (RXPIN,TXPIN);
+
 
 #include "power_sensor.h"
 
