@@ -35,8 +35,8 @@ SoftwareSerial wifiSerialInit (RXPIN,TXPIN);
 
 
 #include <SoftwareSerial.h>
-#define RXPIN 11
-#define TXPIN 12
+#define RXPIN 11    //11
+#define TXPIN 12    //12
 SoftwareSerial wifiSerialInit (RXPIN,TXPIN);
 
 
@@ -47,7 +47,7 @@ uint32_t t_last_measurement=0;
 
 void setup(void){     
   Serial.begin(BPS);
-//  wifiSerialInit.begin(BPS);
+  wifiSerialInit.begin(BPS);
 }
 
 void loop(void){

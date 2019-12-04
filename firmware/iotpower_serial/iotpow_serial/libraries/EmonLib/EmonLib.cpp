@@ -193,6 +193,7 @@ double EnergyMonitor::calcIrms(unsigned int Number_of_Samples)
     filteredI = sampleI - offsetI;
     sqI = filteredI * filteredI;
     if (sqI > 2.0) enable_sumI = 1;
+    // enable_sumI = 1;
     sumI += sqI;  
   }
   // uint32_t t_end = millis();
