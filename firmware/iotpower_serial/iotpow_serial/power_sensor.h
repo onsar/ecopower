@@ -35,6 +35,10 @@
 #define ENTER_6 A5
 #define CURRENT_CONST_6 TRANSFORMATOR_CONSTANT
 
+#define MAME_PWR_7 "v1"
+#define ENTER_7 A6
+#define CURRENT_CONST_7 243.6
+
 
 // Falta la medida del voltage
 
@@ -64,9 +68,10 @@ analog_input p3={MAME_PWR_3,ENTER_3,CURRENT_CONST_3,0,0};
 analog_input p4={MAME_PWR_4,ENTER_4,CURRENT_CONST_4,0,0};
 analog_input p5={MAME_PWR_5,ENTER_5,CURRENT_CONST_5,0,0};
 analog_input p6={MAME_PWR_6,ENTER_6,CURRENT_CONST_6,0,0};
+analog_input v1={MAME_PWR_7,ENTER_7,CURRENT_CONST_7,0,0};
 
 
-analog_input analog_inputs[]={p1,p2,p3,p4,p5,p6};
+analog_input analog_inputs[]={p1,p2,p3,p4,p5,p6,v1};
 
 
 // Function Prototypes
@@ -74,11 +79,23 @@ void calculate_power();
 void buildPowerMessage(uint8_t);
 
 void calculate_power(){
+
   // uint32_t millis_init =millis();
+ 
+  emon1.current(analog_inputs[6].pin_input,analog_inputs[6].constant_input); // calibration.
+  double Vrms = emon1.calcIrms(141);  // Calculate Irms only, (119 20ms for algoritm )
+  // Serial.println(millis()-millis_init);
+  analog_inputs[6].power_sum+= Vrms; 
+  analog_inputs[6].power_measurements++ ;    
+
+  
+
+  
+  // millis_init =millis();
   for (uint8_t i=0; i < NUMBER_OF_PWR_SENSORS; i++){     
     emon1.current(analog_inputs[i].pin_input,analog_inputs[i].constant_input); // calibration.
     double Irms = emon1.calcIrms(141);  // Calculate Irms only, (119 20ms for algoritm )
-    analog_inputs[i].power_sum+=(Irms*230.0); 
+    analog_inputs[i].power_sum+=(Irms*Vrms); 
     analog_inputs[i].power_measurements++ ;    
   }
   // Serial.println(millis()-millis_init);
@@ -86,7 +103,7 @@ void calculate_power(){
 
 void buildPowerMessage(uint8_t output){
   uint32_t millis_init =millis();
-  for (uint8_t i=0; i < NUMBER_OF_PWR_SENSORS; i++){ 
+  for (uint8_t i=0; i < NUMBER_OF_PWR_SENSORS+1; i++){ 
     long power_result = analog_inputs[i].power_sum/analog_inputs[i].power_measurements;     
     if (output==0){
       if(DEBUG){
