@@ -35,8 +35,8 @@ SoftwareSerial wifiSerialInit (RXPIN,TXPIN);
 
 
 #include <SoftwareSerial.h>
-#define RXPIN 11    //11
-#define TXPIN 12    //12
+#define RXPIN 12    //11
+#define TXPIN 11    //12
 SoftwareSerial wifiSerialInit (RXPIN,TXPIN);
 
 

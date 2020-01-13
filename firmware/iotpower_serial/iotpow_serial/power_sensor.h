@@ -85,6 +85,7 @@ void calculate_power(){
   emon1.current(analog_inputs[6].pin_input,analog_inputs[6].constant_input); // calibration.
   double Vrms = emon1.calcIrms(141);  // Calculate Irms only, (119 20ms for algoritm )
   // Serial.println(millis()-millis_init);
+  if(Vrms < 40) Vrms = 230;
   analog_inputs[6].power_sum+= Vrms; 
   analog_inputs[6].power_measurements++ ;    
 
